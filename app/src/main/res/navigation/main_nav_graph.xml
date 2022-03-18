@@ -20,10 +20,10 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_services"
         android:name="com.social.uyirsocial.ui.services.ServicesFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:label="@string/title_services"
+        tools:layout="@layout/fragment_services" />
 
 
 </navigation>

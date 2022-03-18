@@ -4,6 +4,7 @@ import com.social.uyirsocial.MoshiParser
 import com.social.uyirsocial.Resource
 import com.social.uyirsocial.UyirApplication
 import com.social.uyirsocial.domain.model.GalleryItem
+import com.social.uyirsocial.domain.model.ServicesViewItem
 import com.social.uyirsocial.domain.repository.IMainRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,6 +15,14 @@ class MainRepositoryImpl : IMainRepository {
             emit(Resource.Loading())
             MoshiParser.parseGalleryJson(UyirApplication.application)?.let { galleryResponse ->
                 emit(Resource.Success(galleryResponse))
+            }
+        }
+
+    override fun getServiceItems(): Flow<Resource<List<ServicesViewItem>>> =
+        flow {
+            emit(Resource.Loading())
+            MoshiParser.parseMainServicesJson(UyirApplication.application)?.let { serviceResponse ->
+                emit(Resource.Success(serviceResponse))
             }
         }
 
