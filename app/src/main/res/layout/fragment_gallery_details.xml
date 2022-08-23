@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/service_title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/tamil_bold"
+                android:text="இலவச ஆம்புலன்ஸ் சேவை "
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/detail_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_title_txt"
+                app:strokeColor="@color/uyir_red"
+                app:strokeWidth="2dp">
+
+                <TextView
+                    android:id="@+id/service_content_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/tamil_medium"
+                    android:padding="10dp"
+                    android:text=" அவசர தேவைக்கும் இருபத்துநான்கு மணி நேரமும் இயங்கும் உயிர் ஆம்புலன்ஸ் திட்டம் வித அவசர தேவைக்கும் இருபத்துநான்கு மணி நேரமும் இயங்கும் உயிர் ஆம்புலன்ஸ் திட்டம் எந்த வித அவசர தேவைக்கும் இருபத்துநான்கு மணி நேரமும் இயங்கும் உயிர் ஆம்புலன்ஸ் திட்டம் "
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gallery_detail_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="true"
+                android:orientation="vertical"
+                tools:listitem="@layout/gallery_detail_image_item"
+                app:layout_constraintTop_toBottomOf="@+id/detail_txt" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <ProgressBar
+        android:id="@+id/progress_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

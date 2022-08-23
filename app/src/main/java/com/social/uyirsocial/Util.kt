@@ -1,13 +1,19 @@
 package com.social.uyirsocial
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailabilityLight
 import java.io.IOException
-import java.lang.Exception
+
 
 typealias SimpleResource = Resource<Unit>
 
@@ -51,7 +57,7 @@ fun getJsonDataFromAsset(context: Context, fileName: String): String? {
     }
     return jsonString
 }
- inline fun<T> justTryOrNull(block:() -> T): T?{
+ inline fun <T> justTryOrNull(block: () -> T): T?{
      return try {
          block()
      } catch (ex: Exception){
@@ -62,5 +68,35 @@ fun getJsonDataFromAsset(context: Context, fileName: String): String? {
 fun List<String>.mapToSliderItems(context: Context): List<SlideModel> {
     return map {
         SlideModel(context.getDrawableIdByName(it), ScaleTypes.FIT)
+    }
+}
+
+private fun Context.checkGooglePlayServices(): Boolean {
+    // 1
+    val status = GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(this)
+    // 2
+    return if (status != ConnectionResult.SUCCESS) {
+        Log.e("TAG", "Error")
+        // ask user to update google play services and manage the error.
+        false
+    } else {
+        // 3
+        Log.i("TAG", "Google play services updated")
+        true
+    }
+}
+
+fun Context.createDefaultNotificationChannel(channelId: String, channelName: String){
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val notificationChannel =
+            NotificationChannel(channelId, channelName, importance)
+        notificationChannel.enableLights(true)
+        notificationChannel.enableVibration(true)
+        notificationChannel.vibrationPattern =
+            longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+        mNotificationManager.createNotificationChannel(notificationChannel)
     }
 }

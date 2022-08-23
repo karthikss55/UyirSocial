@@ -13,6 +13,8 @@ data class GalleryViewItem(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class GalleryItem(
+    @Json(name = "id")
+    val id: Int = -1,
     @Json(name = "title")
     val title: String? = "",
     @Json(name = "description")

@@ -10,7 +10,7 @@ import com.social.uyirsocial.R
 import com.social.uyirsocial.domain.model.GalleryItem
 import com.social.uyirsocial.mapToSliderItems
 
-class GalleryMainAdapter : RecyclerView.Adapter<GalleryMainAdapter.GalleryMainViewHolder>() {
+class GalleryMainAdapter(val click:(Int, String) -> Unit) : RecyclerView.Adapter<GalleryMainAdapter.GalleryMainViewHolder>() {
     private val galleryItems = arrayListOf<GalleryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryMainViewHolder {
@@ -32,13 +32,19 @@ class GalleryMainAdapter : RecyclerView.Adapter<GalleryMainAdapter.GalleryMainVi
         notifyDataSetChanged()
     }
 
-    inner class GalleryMainViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class GalleryMainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleText: TextView = itemView.findViewById(R.id.gallery_title_txt)
         private val sliderView: ImageSlider = itemView.findViewById(R.id.image_slider)
+        private val moreText: TextView = itemView.findViewById(R.id.more_txt)
+
         fun bind(item: GalleryItem) {
             titleText.text = item.title
             item.imageList?.mapToSliderItems(itemView.context)?.let {
                 sliderView.setImageList(it)
+            }
+
+            moreText.setOnClickListener {
+                click(item.id, item.title.orEmpty())
             }
         }
     }

@@ -6,35 +6,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.social.uyirsocial.*
+import com.social.uyirsocial.databinding.FragmentGalleryDetailsBinding
 import com.social.uyirsocial.domain.model.GalleryItem
-import kotlinx.android.synthetic.main.fragment_gallery.*
+import com.social.uyirsocial.gone
+import com.social.uyirsocial.visible
 
-class GalleryFragment : Fragment() {
+class GalleryDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentGalleryDetailsBinding
+    private val args: GalleryDetailsFragmentArgs by navArgs()
     private lateinit var galleryViewModel: GalleryViewModel
-    lateinit var galleryMainAdapter: GalleryMainAdapter
+    private lateinit var galleryDetailAdapter: GalleryDetailAdapter
+    private var itemId:Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         galleryViewModel =
             ViewModelProvider(this).get(GalleryViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_gallery, container, false)
+        binding = FragmentGalleryDetailsBinding.inflate(inflater)
+        itemId = args.id
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeData()
         galleryViewModel.fetchGalleryItems()
-        galleryMainAdapter = GalleryMainAdapter{ id, title ->
-            navigateToGalleryDetailsFragment(id,title)
-        }
-        gallery_main_recycler_view.apply {
-            adapter = galleryMainAdapter
-            layoutManager = LinearLayoutManager(this@GalleryFragment.requireContext())
+        galleryDetailAdapter = GalleryDetailAdapter()
+        binding.galleryDetailRecyclerView.apply {
+            adapter = galleryDetailAdapter
+            layoutManager = LinearLayoutManager(this@GalleryDetailsFragment.requireContext())
         }
         super.onViewCreated(view, savedInstanceState)
     }
@@ -42,22 +46,20 @@ class GalleryFragment : Fragment() {
     private fun observeData() {
         galleryViewModel._galleryViewState.observe(viewLifecycleOwner, {
             if (it.isLoading) {
-                progress_view.visible()
+                binding.progressView.visible()
             } else {
-                progress_view.gone()
+                binding.progressView.gone()
                 updateAdapter(it.galleryItems)
             }
         })
     }
 
     private fun updateAdapter(galleryItems: List<GalleryItem>?) {
-        galleryItems?.let {
-            galleryMainAdapter.updateItems(it)
+        galleryItems?.firstOrNull{
+            it.id == itemId
+        }?.apply {
+            imageList?.let { galleryDetailAdapter.updateItems(it) }
         }
     }
 
-    private fun navigateToGalleryDetailsFragment(id: Int, title: String) {
-        val action = GalleryFragmentDirections.actionNavigationGalleryToGalleryDetailsFragment().setTitle(title).setId(id)
-        findNavController().navigate(action)
-    }
 }
