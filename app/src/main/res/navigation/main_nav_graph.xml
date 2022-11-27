@@ -14,18 +14,18 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_gallery"
-        android:name="com.social.uyirsocial.ui.gallery.GalleryFragment"
-        android:label="@string/title_gallery"
+        android:id="@+id/navigation_events"
+        android:name="com.social.uyirsocial.ui.events.EventsFragment"
+        android:label="@string/title_events"
         tools:layout="@layout/fragment_gallery">
         <action
-            android:id="@+id/action_navigation_gallery_to_galleryDetailsFragment"
-            app:destination="@id/galleryDetailsFragment"
+            android:id="@+id/action_navigation_events_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/navigation_gallery" />
+            app:popUpTo="@id/navigation_events" />
     </fragment>
 
     <fragment
@@ -34,8 +34,8 @@
         android:label="@string/title_services"
         tools:layout="@layout/fragment_services" />
     <fragment
-        android:id="@+id/galleryDetailsFragment"
-        android:name="com.social.uyirsocial.ui.gallery.GalleryDetailsFragment"
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.social.uyirsocial.ui.events.EventDetailsFragment"
         android:label="{title}">
         <argument
             android:name="id"
@@ -46,6 +46,10 @@
             android:defaultValue="test"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_more"
+        android:name="com.social.uyirsocial.ui.more.MoreHomeFragment"
+        android:label="@string/title_more" />
 
 
 </navigation>

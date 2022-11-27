@@ -12,7 +12,7 @@ object MoshiParser {
 
     fun parseGalleryJson(context: Context): List<GalleryItem>? {
        return justTryOrNull {
-            val jsonFile = getJsonDataFromAsset(context, "gallery_json")
+            val jsonFile = getJsonDataFromAsset(context, "events_json.json")
             val moshi: Moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
                 .build()

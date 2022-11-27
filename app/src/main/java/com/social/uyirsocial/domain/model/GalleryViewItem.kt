@@ -17,6 +17,10 @@ data class GalleryItem(
     val id: Int = -1,
     @Json(name = "title")
     val title: String? = "",
+    @Json(name = "place")
+    val place: String? = "",
+    @Json(name = "date")
+    val date: String? = "",
     @Json(name = "description")
     val description: String? = "",
     @Json(name = "image_list")

@@ -5,6 +5,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_services">Services</string>
     <string name="title_gallery">Gallery</string>
+    <string name="title_events">Events</string>
+    <string name="title_more">More</string>
     <string name="font_light">HindMadurai-Light</string>
     <string name="font_medium">HindMadurai-Medium</string>
 

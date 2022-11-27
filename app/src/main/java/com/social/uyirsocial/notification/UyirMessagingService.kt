@@ -14,8 +14,11 @@ class UyirMessagingService: FirebaseMessagingService() {
         super.onNewToken(token)
     }
 
+
+
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
+        Log.d("Push", "on message received")
         handleMessage(message)
     }
 

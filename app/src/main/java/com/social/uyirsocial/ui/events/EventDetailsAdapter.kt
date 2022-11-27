@@ -1,4 +1,4 @@
-package com.social.uyirsocial.ui.gallery
+package com.social.uyirsocial.ui.events
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.social.uyirsocial.R
 import com.social.uyirsocial.getDrawableByName
 
-class GalleryDetailAdapter: RecyclerView.Adapter<GalleryDetailAdapter.GalleryDetailViewHolder>() {
+class EventDetailsAdapter: RecyclerView.Adapter<EventDetailsAdapter.GalleryDetailViewHolder>() {
 
     private val galleryImageItems = arrayListOf<String>()
 

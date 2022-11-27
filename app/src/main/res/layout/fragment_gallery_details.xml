@@ -25,6 +25,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/image_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_title_txt"
+                app:strokeColor="@color/grey_font"
+                app:strokeWidth="1dp">
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:clickable="true"
+                    app:iss_auto_cycle="true"
+                    app:iss_delay="0"
+                    app:iss_period="2000"
+                    app:iss_placeholder="@drawable/sample_gallery_item" />
+
+            </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/detail_txt"
                 android:layout_width="match_parent"
@@ -33,7 +59,7 @@
                 app:cardCornerRadius="5dp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/service_title_txt"
+                app:layout_constraintTop_toBottomOf="@+id/image_container"
                 app:strokeColor="@color/uyir_red"
                 app:strokeWidth="2dp">
 
@@ -48,14 +74,6 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gallery_detail_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="true"
-                android:orientation="vertical"
-                tools:listitem="@layout/gallery_detail_image_item"
-                app:layout_constraintTop_toBottomOf="@+id/detail_txt" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

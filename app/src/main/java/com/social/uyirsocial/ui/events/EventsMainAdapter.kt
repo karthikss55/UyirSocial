@@ -1,4 +1,4 @@
-package com.social.uyirsocial.ui.gallery
+package com.social.uyirsocial.ui.events
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.social.uyirsocial.R
 import com.social.uyirsocial.domain.model.GalleryItem
 import com.social.uyirsocial.mapToSliderItems
 
-class GalleryMainAdapter(val click:(Int, String) -> Unit) : RecyclerView.Adapter<GalleryMainAdapter.GalleryMainViewHolder>() {
+class EventsMainAdapter(val click:(Int, String) -> Unit) : RecyclerView.Adapter<EventsMainAdapter.GalleryMainViewHolder>() {
     private val galleryItems = arrayListOf<GalleryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryMainViewHolder {
@@ -34,16 +34,26 @@ class GalleryMainAdapter(val click:(Int, String) -> Unit) : RecyclerView.Adapter
 
     inner class GalleryMainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleText: TextView = itemView.findViewById(R.id.gallery_title_txt)
+        private val placeText: TextView = itemView.findViewById(R.id.place_txt)
+        private val dateText: TextView = itemView.findViewById(R.id.date_text)
         private val sliderView: ImageSlider = itemView.findViewById(R.id.image_slider)
         private val moreText: TextView = itemView.findViewById(R.id.more_txt)
+        private val imageContainer = itemView.findViewById<ViewGroup>(R.id.image_container)
 
         fun bind(item: GalleryItem) {
             titleText.text = item.title
             item.imageList?.mapToSliderItems(itemView.context)?.let {
                 sliderView.setImageList(it)
             }
-
+            placeText.text = item.place
+            dateText.text = item.date
             moreText.setOnClickListener {
+                click(item.id, item.title.orEmpty())
+            }
+            itemView.setOnClickListener {
+                click(item.id, item.title.orEmpty())
+            }
+            imageContainer.setOnClickListener {
                 click(item.id, item.title.orEmpty())
             }
         }

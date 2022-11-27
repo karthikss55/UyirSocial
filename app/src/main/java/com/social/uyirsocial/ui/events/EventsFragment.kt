@@ -1,4 +1,4 @@
-package com.social.uyirsocial.ui.gallery
+package com.social.uyirsocial.ui.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,9 +12,9 @@ import com.social.uyirsocial.*
 import com.social.uyirsocial.domain.model.GalleryItem
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
-class GalleryFragment : Fragment() {
-    private lateinit var galleryViewModel: GalleryViewModel
-    lateinit var galleryMainAdapter: GalleryMainAdapter
+class EventsFragment : Fragment() {
+    private lateinit var galleryViewModel: EventsViewModel
+    lateinit var galleryMainAdapter: EventsMainAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,19 +22,19 @@ class GalleryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+            ViewModelProvider(this).get(EventsViewModel::class.java)
         return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeData()
         galleryViewModel.fetchGalleryItems()
-        galleryMainAdapter = GalleryMainAdapter{ id, title ->
+        galleryMainAdapter = EventsMainAdapter{ id, title ->
             navigateToGalleryDetailsFragment(id,title)
         }
         gallery_main_recycler_view.apply {
             adapter = galleryMainAdapter
-            layoutManager = LinearLayoutManager(this@GalleryFragment.requireContext())
+            layoutManager = LinearLayoutManager(this@EventsFragment.requireContext())
         }
         super.onViewCreated(view, savedInstanceState)
     }
@@ -57,7 +57,7 @@ class GalleryFragment : Fragment() {
     }
 
     private fun navigateToGalleryDetailsFragment(id: Int, title: String) {
-        val action = GalleryFragmentDirections.actionNavigationGalleryToGalleryDetailsFragment().setTitle(title).setId(id)
+        val action = EventsFragmentDirections.actionNavigationEventsToEventDetailsFragment().setTitle(title).setId(id)
         findNavController().navigate(action)
     }
 }
